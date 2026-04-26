@@ -1,80 +1,125 @@
 // widget-core.js — edit this file to update everyone's widget
 
-const LAT = 51.5072;
-const LON = -0.1276;
-const BG_IMAGE_URL = "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/bg.png";
+const PHOTOS = [
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo1.jpg",
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo2.png",
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo3.png",
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo4.png",
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo5.png",
+  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo6.png",
+];
 
-// Fetch weather
-const weatherReq = new Request(
-  `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m&timezone=Europe%2FLondon`
-);
-const weatherData = await weatherReq.loadJSON();
-const temp = Math.round(weatherData.current.temperature_2m);
+// Pick photo based on 10-minute intervals
+const photoIndex = Math.floor(Date.now() / (10 * 60 * 1000)) % PHOTOS.length;
+
+// Fetch weather for both cities
+const [londonRes, sfRes] = await Promise.all([
+  new Request("https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current=temperature_2m&timezone=Europe%2FLondon").loadJSON(),
+  new Request("https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current=temperature_2m&timezone=America%2FLos_Angeles").loadJSON(),
+]);
+const londonTemp = Math.round(londonRes.current.temperature_2m);
+const sfTemp = Math.round(sfRes.current.temperature_2m);
 
 // Fetch background image
-const imgReq = new Request(BG_IMAGE_URL);
+const imgReq = new Request(PHOTOS[photoIndex]);
 const bgImage = await imgReq.loadImage();
 
-// Current time in London
+// Times
 const now = new Date();
-const timeStr = now.toLocaleTimeString("en-GB", {
-  hour: "numeric",
-  minute: "2-digit",
-  hour12: true,
-  timeZone: "Europe/London",
-}).toUpperCase();
+const londonTime = now.toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Europe/London" }).toUpperCase();
+const sfTime = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/Los_Angeles" }).toUpperCase();
+
+// Together since
+const togetherSince = new Date("2025-12-27");
+const diffDays = Math.floor((now.getTime() - togetherSince.getTime()) / (1000 * 60 * 60 * 24));
+let togetherLabel;
+if (diffDays < 0) {
+  togetherLabel = "Not yet!";
+} else if (diffDays < 7) {
+  togetherLabel = `${diffDays} ${diffDays === 1 ? "Day" : "Days"} ago`;
+} else if (diffDays < 30) {
+  const weeks = Math.floor(diffDays / 7);
+  togetherLabel = `${weeks} ${weeks === 1 ? "Week" : "Weeks"} ago`;
+} else if (diffDays < 365) {
+  const months = Math.floor(diffDays / 30);
+  togetherLabel = `${months} ${months === 1 ? "Month" : "Months"} ago`;
+} else {
+  togetherLabel = `${diffDays} Days ago`;
+}
 
 // Build widget
 const widget = new ListWidget();
-widget.setPadding(16, 16, 16, 16);
+widget.setPadding(12, 12, 12, 12);
 widget.backgroundImage = bgImage;
 
-// Top section
-const topStack = widget.addStack();
-topStack.layoutHorizontally();
+// Dark overlay via background gradient
+const gradient = new LinearGradient();
+gradient.locations = [0, 1];
+gradient.colors = [new Color("#000", 0.3), new Color("#000", 0.3)];
+widget.backgroundGradient = gradient;
 
-// Left: Today + time
-const leftStack = topStack.addStack();
-leftStack.layoutVertically();
+const shadow = new Color("#000", 0.5);
 
-const todayText = leftStack.addText("Today");
-todayText.font = Font.semiboldSystemFont(14);
-todayText.textColor = Color.white();
-todayText.shadowColor = new Color("#000", 0.5);
-todayText.shadowRadius = 3;
+// London
+const londonLabel = widget.addText("London");
+londonLabel.font = Font.semiboldSystemFont(11);
+londonLabel.textColor = Color.white();
+londonLabel.shadowColor = shadow;
+londonLabel.shadowRadius = 3;
 
-const timeText = leftStack.addText(timeStr);
-timeText.font = Font.semiboldSystemFont(14);
-timeText.textColor = Color.white();
-timeText.shadowColor = new Color("#000", 0.5);
-timeText.shadowRadius = 3;
+const londonTempText = widget.addText(`${londonTemp}°`);
+londonTempText.font = Font.blackSystemFont(32);
+londonTempText.textColor = Color.white();
+londonTempText.shadowColor = shadow;
+londonTempText.shadowRadius = 3;
 
-topStack.addSpacer();
+const londonTimeText = widget.addText(londonTime);
+londonTimeText.font = Font.semiboldSystemFont(11);
+londonTimeText.textColor = Color.white();
+londonTimeText.shadowColor = shadow;
+londonTimeText.shadowRadius = 3;
 
-// Right: Temperature
-const tempText = topStack.addText(`${temp}°`);
-tempText.font = Font.blackSystemFont(48);
-tempText.textColor = Color.white();
-tempText.shadowColor = new Color("#000", 0.5);
-tempText.shadowRadius = 4;
+widget.addSpacer(4);
+
+// San Francisco
+const sfLabel = widget.addText("San Francisco");
+sfLabel.font = Font.semiboldSystemFont(11);
+sfLabel.textColor = Color.white();
+sfLabel.shadowColor = shadow;
+sfLabel.shadowRadius = 3;
+
+const sfTempText = widget.addText(`${sfTemp}°`);
+sfTempText.font = Font.blackSystemFont(32);
+sfTempText.textColor = Color.white();
+sfTempText.shadowColor = shadow;
+sfTempText.shadowRadius = 3;
+
+const sfTimeText = widget.addText(sfTime);
+sfTimeText.font = Font.semiboldSystemFont(11);
+sfTimeText.textColor = Color.white();
+sfTimeText.shadowColor = shadow;
+sfTimeText.shadowRadius = 3;
 
 widget.addSpacer();
 
-// Bottom: Location
-const locationStack = widget.addStack();
-locationStack.layoutVertically();
+// Together since
+const togetherTitle = widget.addText("Together since");
+togetherTitle.font = Font.semiboldSystemFont(11);
+togetherTitle.textColor = Color.white();
+togetherTitle.shadowColor = shadow;
+togetherTitle.shadowRadius = 3;
 
-const cityText = locationStack.addText("London");
-cityText.font = Font.semiboldSystemFont(14);
-cityText.textColor = Color.white();
-cityText.shadowColor = new Color("#000", 0.5);
-cityText.shadowRadius = 3;
+const togetherCount = widget.addText(togetherLabel);
+togetherCount.font = Font.boldSystemFont(14);
+togetherCount.textColor = Color.white();
+togetherCount.shadowColor = shadow;
+togetherCount.shadowRadius = 3;
 
-const countryText = locationStack.addText("UK");
-countryText.font = Font.semiboldSystemFont(14);
-countryText.textColor = Color.white();
-countryText.shadowColor = new Color("#000", 0.5);
-countryText.shadowRadius = 3;
+const dateText = widget.addText("Dec 27, 2025");
+dateText.font = Font.semiboldSystemFont(10);
+dateText.textColor = new Color("#fff", 0.7);
+dateText.shadowColor = shadow;
+dateText.shadowRadius = 3;
 
 if (config.runsInWidget) {
   Script.setWidget(widget);
