@@ -1,5 +1,4 @@
 const PHOTOS = [
-  "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo1.jpg",
   "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo2.png",
   "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo3.png",
   "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo4.png",

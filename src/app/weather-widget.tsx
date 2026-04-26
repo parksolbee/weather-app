@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Rain } from "./rain";
 
-const PHOTOS = ["/photo1.jpg", "/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
+const PHOTOS = ["/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
 const TOGETHER_SINCE = new Date("2025-12-27");
 
 function getTogetherText() {
