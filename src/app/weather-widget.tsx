@@ -53,7 +53,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
   useEffect(() => {
     const id = setInterval(() => {
       setPhotoIndex((i) => (i + 1) % PHOTOS.length);
-    }, 30 * 1000); // 30 seconds
+    }, 20 * 1000); // 20 seconds
     return () => clearInterval(id);
   }, []);
 

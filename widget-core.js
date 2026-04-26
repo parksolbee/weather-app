@@ -41,7 +41,7 @@ if (diffDays < 0) {
 }
 
 const widget = new ListWidget();
-widget.setPadding(16, 20, 16, 20);
+widget.setPadding(24, 28, 24, 28);
 widget.backgroundImage = bgImage;
 
 const gradient = new LinearGradient();
