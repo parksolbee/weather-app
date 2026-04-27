@@ -89,28 +89,25 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
 
   return (
     <div className="relative w-[400px] h-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111] flex flex-col">
-      {/* Top: Together since */}
-      <div className="p-5 pb-3">
-        <p className="text-white font-bold text-[16px]">Together since</p>
-        <p className="text-white/40 text-[12px]">Dec 27, 2025 · {together.count} {together.label}</p>
-      </div>
-
-      {/* Photo + Messages row */}
-      <div className="flex items-center gap-4 px-5 pb-3">
-        {/* Rotating photo */}
-        <div className="relative w-[140px] h-[140px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
-          {PHOTOS.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-              style={{ objectPosition: "center 30%", opacity: i === photoIndex ? 1 : 0 }}
-            />
-          ))}
+      {/* Top: Photo with together since + messages overlaid */}
+      <div className="relative h-[220px] overflow-hidden">
+        {PHOTOS.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+            style={{ objectPosition: "center 30%", opacity: i === photoIndex ? 1 : 0 }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent" />
+        <div className="absolute right-4 top-4 flex flex-col items-end gap-1">
+          <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
+            <p className="text-white font-bold text-[14px]">Together since</p>
+            <p className="text-white/60 text-[11px]">Dec 27, 2025 · {together.count} {together.label}</p>
+          </div>
         </div>
-        {/* Messages */}
-        <div className="flex-1 min-w-0">
+        <div className="absolute right-4 bottom-4 left-[40%]">
           <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
         </div>
       </div>
