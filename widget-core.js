@@ -7,9 +7,9 @@ var PHOTOS = [
 ];
 
 var CONVOS = [
-  [{ from: "sb", text: "Dreaming of you \uD83D\uDCAD\uD83E\uDEF6\uD83C\uDFFB" }, { from: "vas", text: "See you in the dreams" }],
-  [{ from: "vas", text: "You can rely on Vasu \u2764\uFE0F" }, { from: "sb", text: "Nawww love you boo" }],
-  [{ from: "vas", text: "I'm a ddongjaengyi \uD83D\uDCA9" }, { from: "sb", text: "You're my favorite ddongjaengyi" }],
+  [{ from: "sb", text: "Dreaming of you 💭🫶🏼" }, { from: "vas", text: "See you in the dreams" }],
+  [{ from: "vas", text: "You can rely on Vasu ❤️" }, { from: "sb", text: "Nawww love you boo" }],
+  [{ from: "vas", text: "I'm a ddongjaengyi 💩" }, { from: "sb", text: "You're my favorite ddongjaengyi" }],
   [{ from: "sb", text: "You're the love of my life" }, { from: "vas", text: "And you are mine" }],
   [{ from: "vas", text: "You're my everything" }, { from: "sb", text: "And I am yours" }],
 ];
@@ -49,130 +49,103 @@ if (diffDays < 0) {
   togetherLabel = diffDays + " days";
 }
 
-var shadow = new Color("#000", 0.5);
 var widget = new ListWidget();
-widget.setPadding(0, 0, 0, 0);
-widget.backgroundColor = new Color("#111", 1);
+widget.setPadding(16, 16, 16, 16);
+widget.backgroundImage = bgImage;
 
-// Top section: photo as background with together since + messages overlaid
-var topSection = widget.addStack();
-topSection.layoutHorizontally();
-topSection.backgroundImage = bgImage;
-topSection.size = new Size(0, 110);
-topSection.setPadding(10, 14, 10, 14);
+// Dark overlay gradient
+var gradient = new LinearGradient();
+gradient.locations = [0, 0.4, 1];
+gradient.colors = [new Color("#000", 0.2), new Color("#000", 0.3), new Color("#000", 0.7)];
+widget.backgroundGradient = gradient;
 
-// Left spacer to push messages right
-topSection.addSpacer();
+var shadow = new Color("#000", 0.6);
 
-// Right side: together since + messages
-var rightCol = topSection.addStack();
-rightCol.layoutVertically();
-rightCol.spacing = 4;
-
-// Together since overlay
-var togetherBg = rightCol.addStack();
-togetherBg.backgroundColor = new Color("#000", 0.5);
-togetherBg.cornerRadius = 8;
-togetherBg.setPadding(4, 8, 4, 8);
-togetherBg.layoutVertically();
-
-var togetherTitle = togetherBg.addText("Together since");
-togetherTitle.font = Font.boldSystemFont(11);
+// Together since (no background box)
+var togetherTitle = widget.addText("Together since");
+togetherTitle.font = Font.boldSystemFont(13);
 togetherTitle.textColor = Color.white();
+togetherTitle.shadowColor = shadow;
+togetherTitle.shadowRadius = 3;
 
-var togetherSub = togetherBg.addText("Dec 27, 2025 \u00B7 " + togetherLabel);
-togetherSub.font = Font.systemFont(9);
+var togetherSub = widget.addText("Dec 27, 2025 · " + togetherLabel);
+togetherSub.font = Font.systemFont(10);
 togetherSub.textColor = new Color("#fff", 0.6);
+togetherSub.shadowColor = shadow;
+togetherSub.shadowRadius = 3;
 
-rightCol.addSpacer();
+widget.addSpacer(6);
 
-// Messages overlay
+// Messages
 var convo = CONVOS[photoIndex];
 for (var i = 0; i < convo.length; i++) {
   var msg = convo[i];
-  var row = rightCol.addStack();
+  var row = widget.addStack();
   row.layoutHorizontally();
   if (msg.from === "sb") row.addSpacer();
   var bubble = row.addStack();
   bubble.backgroundColor = msg.from === "sb" ? new Color("#9b4d6e", 0.9) : new Color("#000", 0.5);
-  bubble.cornerRadius = 10;
-  bubble.setPadding(3, 8, 3, 8);
+  bubble.cornerRadius = 12;
+  bubble.setPadding(4, 10, 4, 10);
   var msgText = bubble.addText(msg.text);
-  msgText.font = Font.systemFont(10);
+  msgText.font = Font.systemFont(11);
   msgText.textColor = Color.white();
   msgText.lineLimit = 1;
   if (msg.from === "vas") row.addSpacer();
 }
 
-widget.addSpacer(6);
+widget.addSpacer();
 
-// City cards row
+// City cards row - centered
 var citiesRow = widget.addStack();
 citiesRow.layoutHorizontally();
-citiesRow.spacing = 8;
-citiesRow.setPadding(0, 14, 12, 14);
+citiesRow.spacing = 12;
 
-// London card
+// London
 var londonCard = citiesRow.addStack();
 londonCard.layoutVertically();
-londonCard.backgroundColor = new Color("#fff", 0.05);
-londonCard.cornerRadius = 14;
-londonCard.setPadding(8, 10, 8, 10);
 
-var londonHeader = londonCard.addStack();
-londonHeader.layoutHorizontally();
-londonHeader.spacing = 4;
-var londonEmoji = londonHeader.addText("\uD83E\uDED6");
-londonEmoji.font = Font.systemFont(10);
-var londonLabel = londonHeader.addText("LONDON");
-londonLabel.font = Font.semiboldSystemFont(9);
-londonLabel.textColor = new Color("#fff", 0.5);
+var londonLabel = londonCard.addText("🫖 LONDON · " + londonDate);
+londonLabel.font = Font.semiboldSystemFont(10);
+londonLabel.textColor = new Color("#fff", 0.6);
+londonLabel.shadowColor = shadow;
+londonLabel.shadowRadius = 3;
 
-londonCard.addSpacer(2);
 var londonTimeText = londonCard.addText(londonTime);
-londonTimeText.font = Font.boldSystemFont(16);
+londonTimeText.font = Font.boldMonospacedSystemFont(22);
 londonTimeText.textColor = Color.white();
+londonTimeText.shadowColor = shadow;
+londonTimeText.shadowRadius = 3;
 
-var londonInfo = londonCard.addStack();
-londonInfo.layoutHorizontally();
-londonInfo.spacing = 4;
-var londonTempText = londonInfo.addText(londonTemp + "\u00B0");
-londonTempText.font = Font.boldSystemFont(13);
+var londonTempText = londonCard.addText(londonTemp + "°");
+londonTempText.font = Font.boldMonospacedSystemFont(16);
 londonTempText.textColor = new Color("#e8a0bf", 1);
-var londonDateText = londonInfo.addText(londonDate);
-londonDateText.font = Font.systemFont(9);
-londonDateText.textColor = new Color("#fff", 0.3);
+londonTempText.shadowColor = shadow;
+londonTempText.shadowRadius = 3;
 
-// SF card
+citiesRow.addSpacer();
+
+// SF
 var sfCard = citiesRow.addStack();
 sfCard.layoutVertically();
-sfCard.backgroundColor = new Color("#fff", 0.05);
-sfCard.cornerRadius = 14;
-sfCard.setPadding(8, 10, 8, 10);
 
-var sfHeader = sfCard.addStack();
-sfHeader.layoutHorizontally();
-sfHeader.spacing = 4;
-var sfEmoji = sfHeader.addText("\uD83C\uDF01");
-sfEmoji.font = Font.systemFont(10);
-var sfLabel = sfHeader.addText("SAN FRANCISCO");
-sfLabel.font = Font.semiboldSystemFont(9);
-sfLabel.textColor = new Color("#fff", 0.5);
+var sfLabel = sfCard.addText("🌁 SF · " + sfDate);
+sfLabel.font = Font.semiboldSystemFont(10);
+sfLabel.textColor = new Color("#fff", 0.6);
+sfLabel.shadowColor = shadow;
+sfLabel.shadowRadius = 3;
 
-sfCard.addSpacer(2);
 var sfTimeText = sfCard.addText(sfTime);
-sfTimeText.font = Font.boldSystemFont(16);
+sfTimeText.font = Font.boldMonospacedSystemFont(22);
 sfTimeText.textColor = Color.white();
+sfTimeText.shadowColor = shadow;
+sfTimeText.shadowRadius = 3;
 
-var sfInfo = sfCard.addStack();
-sfInfo.layoutHorizontally();
-sfInfo.spacing = 4;
-var sfTempText = sfInfo.addText(sfTemp + "\u00B0");
-sfTempText.font = Font.boldSystemFont(13);
+var sfTempText = sfCard.addText(sfTemp + "°");
+sfTempText.font = Font.boldMonospacedSystemFont(16);
 sfTempText.textColor = new Color("#e8a0bf", 1);
-var sfDateText = sfInfo.addText(sfDate);
-sfDateText.font = Font.systemFont(9);
-sfDateText.textColor = new Color("#fff", 0.3);
+sfTempText.shadowColor = shadow;
+sfTempText.shadowRadius = 3;
 
 if (config.runsInWidget) {
   Script.setWidget(widget);
