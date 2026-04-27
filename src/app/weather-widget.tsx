@@ -88,7 +88,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
   }, []);
 
   return (
-    <div className="relative w-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111]">
+    <div className="relative w-[400px] h-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111] flex flex-col">
       {/* Top: Together since */}
       <div className="p-5 pb-3">
         <p className="text-white font-bold text-[16px]">Together since</p>
@@ -98,7 +98,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
       {/* Photo + Messages row */}
       <div className="flex items-center gap-4 px-5 pb-3">
         {/* Rotating photo */}
-        <div className="relative w-[120px] h-[120px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
+        <div className="relative w-[140px] h-[140px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
           {PHOTOS.map((src, i) => (
             <img
               key={src}
