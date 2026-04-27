@@ -50,7 +50,7 @@ if (diffDays < 0) {
 }
 
 var widget = new ListWidget();
-widget.setPadding(20, 24, 20, 24);
+widget.setPadding(20, 18, 20, 18);
 widget.backgroundImage = bgImage;
 
 var gradient = new LinearGradient();
