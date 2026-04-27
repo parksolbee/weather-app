@@ -14,7 +14,7 @@ var CONVOS = [
   [{ from: "vas", text: "You're my everything" }, { from: "sb", text: "And I am yours" }],
 ];
 
-var photoIndex = Math.floor(Date.now() / (10 * 60 * 1000)) % PHOTOS.length;
+var photoIndex = Math.floor(Date.now() / (20 * 1000)) % PHOTOS.length;
 
 var londonReq = new Request("https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current=temperature_2m&timezone=Europe%2FLondon");
 var sfReq = new Request("https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current=temperature_2m&timezone=America%2FLos_Angeles");
@@ -84,7 +84,7 @@ for (var i = 0; i < convo.length; i++) {
   var bubble = row.addStack();
   bubble.backgroundColor = msg.from === "sb" ? new Color("#9b4d6e", 0.9) : new Color("#000", 0.5);
   bubble.cornerRadius = 14;
-  bubble.setPadding(6, 14, 6, 14);
+  bubble.setPadding(5, 12, 5, 12);
   var msgText = bubble.addText(msg.text);
   msgText.font = Font.regularRoundedSystemFont(13);
   msgText.textColor = Color.white();
