@@ -89,8 +89,8 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
 
   return (
     <div className="relative w-[400px] h-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111] flex flex-col">
-      {/* Top: Photo with together since + messages overlaid */}
-      <div className="relative h-[220px] overflow-hidden">
+      {/* Fullscreen photo background */}
+      <div className="absolute inset-0">
         {PHOTOS.map((src, i) => (
           <img
             key={src}
@@ -100,25 +100,26 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             style={{ objectPosition: "center 30%", opacity: i === photoIndex ? 1 : 0 }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent" />
-        <div className="absolute right-4 top-4 flex flex-col items-end gap-1">
-          <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
-            <p className="text-white font-bold text-[14px]">Together since</p>
-            <p className="text-white/60 text-[11px]">Dec 27, 2025 · {together.count} {together.label}</p>
-          </div>
-        </div>
-        <div className="absolute right-4 bottom-4 left-[40%]">
-          <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
-        </div>
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Divider */}
-      <div className="mx-5 h-px bg-white/10" />
+      {/* Content overlaid */}
+      <div className="relative z-10 flex flex-col justify-between h-full p-5">
+        {/* Top: Together since */}
+        <div>
+          <p className="text-white font-bold text-[14px] drop-shadow-md">Together since</p>
+          <p className="text-white/60 text-[11px] drop-shadow-md">Dec 27, 2025 · {together.count} {together.label}</p>
+        </div>
 
-      {/* Bottom: Two city cards */}
-      <div className="flex gap-3 p-5 pt-4">
+        {/* Middle: Messages */}
+        <div className="self-start">
+          <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
+        </div>
+
+        {/* Bottom: Two city cards */}
+        <div className="flex gap-3">
         {/* London */}
-        <div className="flex-1 bg-white/5 rounded-2xl p-4">
+        <div className="flex-1 bg-black/10 backdrop-blur-sm rounded-2xl p-4">
           <div className="flex items-center gap-1.5 mb-2">
             <span className="text-[14px]">🫖</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">London</p>
@@ -131,7 +132,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         </div>
 
         {/* San Francisco */}
-        <div className="flex-1 bg-white/5 rounded-2xl p-4">
+        <div className="flex-1 bg-black/10 backdrop-blur-sm rounded-2xl p-4">
           <div className="flex items-center gap-1.5 mb-2">
             <span className="text-[14px]">🌁</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">San Francisco</p>
@@ -142,6 +143,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             <p className="text-white/30 text-[11px]">{sf.date}</p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
@@ -164,8 +166,8 @@ function MessageBubbles({ convo, photoIndex }: { convo: { from: string; text: st
           key={`${photoIndex}-${i}`}
           className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"} transition-all duration-500 ${i < visibleCount ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
         >
-          <div className={`${msg.from === "sb" ? "bg-[#9b4d6e] rounded-2xl rounded-br-sm" : "bg-white/10 rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[80%]`}>
-            <p className="text-white text-[12px]">{msg.text}</p>
+          <div className={`${msg.from === "sb" ? "bg-[#9b4d6e] rounded-2xl rounded-br-sm" : "bg-black/50 backdrop-blur-sm rounded-2xl rounded-bl-sm"} inline-block px-3 py-1.5`}>
+            <p className="text-white text-[12px] whitespace-nowrap">{msg.text}</p>
           </div>
         </div>
       ))}
