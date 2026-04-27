@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { WidgetClouds } from "./widget-clouds";
 
 const PHOTOS = ["/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
 const CONVOS = [
@@ -84,56 +83,66 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
   useEffect(() => {
     const id = setInterval(() => {
       setPhotoIndex((i) => (i + 1) % PHOTOS.length);
-    }, 20 * 1000); // 20 seconds
+    }, 20 * 1000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <div className="relative w-[400px] h-[400px] rounded-[16px] overflow-hidden shadow-2xl shrink-0">
-      {/* Background photo */}
-      {PHOTOS.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-          style={{
-            objectPosition: "center 40%",
-            opacity: i === photoIndex ? 1 : 0,
-          }}
-        />
-      ))}
+    <div className="relative w-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111]">
+      {/* Top: Photo + Together */}
+      <div className="flex items-center gap-4 p-5 pb-3">
+        {/* Rotating photo */}
+        <div className="relative w-[120px] h-[120px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
+          {PHOTOS.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+              style={{ objectPosition: "center 30%", opacity: i === photoIndex ? 1 : 0 }}
+            />
+          ))}
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[#e8a0bf] text-[11px] font-semibold uppercase tracking-wider">Together since</p>
+          <p className="text-white font-bold text-[22px] leading-tight">{together.count} {together.label}</p>
+          <p className="text-white/40 text-[11px]">Dec 27, 2025</p>
+        </div>
+      </div>
 
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      {/* Messages */}
+      <div className="px-5 pb-3">
+        <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
+      </div>
 
-      {/* Floating clouds */}
-      <WidgetClouds />
+      {/* Divider */}
+      <div className="mx-5 h-px bg-white/10" />
 
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-8">
-        {/* Together since + message */}
-        <div>
-          <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
-          <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
-          <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
+      {/* Bottom: Two city cards */}
+      <div className="flex gap-3 p-5 pt-4">
+        {/* London */}
+        <div className="flex-1 bg-white/5 rounded-2xl p-4">
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="text-[14px]">🫖</span>
+            <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">London</p>
+          </div>
+          <p className="text-white font-bold text-[28px] leading-none tracking-[-1px]">{london.time}</p>
+          <div className="flex items-baseline gap-2 mt-1.5">
+            <p className="text-[#e8a0bf] font-bold text-[18px]">{londonTemp}°</p>
+            <p className="text-white/30 text-[11px]">{london.date}</p>
+          </div>
         </div>
 
-        {/* Cities row */}
-        <div className="flex gap-6">
-          {/* London */}
-          <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">🫖 London <span className="text-white/60 text-[11px]">{london.date}</span></p>
-            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{london.time}</p>
-            <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{londonTemp}°</p>
+        {/* San Francisco */}
+        <div className="flex-1 bg-white/5 rounded-2xl p-4">
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="text-[14px]">🌁</span>
+            <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">San Francisco</p>
           </div>
-
-          {/* San Francisco */}
-          <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">🌁 San Francisco <span className="text-white/60 text-[11px]">{sf.date}</span></p>
-            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{sf.time}</p>
-            <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{sfTemp}°</p>
+          <p className="text-white font-bold text-[28px] leading-none tracking-[-1px]">{sf.time}</p>
+          <div className="flex items-baseline gap-2 mt-1.5">
+            <p className="text-[#e8a0bf] font-bold text-[18px]">{sfTemp}°</p>
+            <p className="text-white/30 text-[11px]">{sf.date}</p>
           </div>
         </div>
       </div>
@@ -152,14 +161,14 @@ function MessageBubbles({ convo, photoIndex }: { convo: { from: string; text: st
   }, [photoIndex]);
 
   return (
-    <div className="flex flex-col gap-1.5 mt-2">
+    <div className="flex flex-col gap-1">
       {convo.map((msg, i) => (
         <div
           key={`${photoIndex}-${i}`}
           className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"} transition-all duration-500 ${i < visibleCount ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
         >
-          <div className={`${msg.from === "sb" ? "bg-[#007AFF] rounded-2xl rounded-br-sm" : "bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[75%] shadow-lg`}>
-            <p className="text-white text-[13px]">{msg.text}</p>
+          <div className={`${msg.from === "sb" ? "bg-[#9b4d6e] rounded-2xl rounded-br-sm" : "bg-white/10 rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[80%]`}>
+            <p className="text-white text-[12px]">{msg.text}</p>
           </div>
         </div>
       ))}
