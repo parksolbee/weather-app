@@ -16,13 +16,13 @@ export default async function Home() {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-[#ffd6c0] p-6 overflow-hidden">
       {/* Animated blob gradient background */}
-      <div className="absolute inset-0 bg-[#f8d0c8]">
-        <div className="absolute w-[600px] h-[600px] top-[-10%] left-[-10%] rounded-full bg-[#e8a0bf] blur-[130px] animate-blob opacity-70" />
-        <div className="absolute w-[500px] h-[500px] top-[20%] right-[-5%] rounded-full bg-[#ffc371] blur-[120px] animate-blob2 opacity-60" />
-        <div className="absolute w-[550px] h-[550px] bottom-[-10%] left-[20%] rounded-full bg-[#ff5f6d] blur-[130px] animate-blob3 opacity-55" />
-        <div className="absolute w-[450px] h-[450px] top-[60%] left-[10%] rounded-full bg-[#e8a0bf] blur-[110px] animate-blob2 opacity-65" style={{ animationDelay: "2s" }} />
-        <div className="absolute w-[400px] h-[400px] top-[40%] right-[30%] rounded-full bg-[#ffad85] blur-[100px] animate-blob opacity-50" style={{ animationDelay: "4s" }} />
-        <div className="absolute w-[500px] h-[500px] bottom-[10%] right-[-5%] rounded-full bg-[#e8a0bf] blur-[120px] animate-blob3 opacity-55" style={{ animationDelay: "6s" }} />
+      <div className="absolute inset-0 bg-[#f0c0b8]">
+        <div className="absolute w-[600px] h-[600px] top-[-10%] left-[-10%] rounded-full bg-[#d0709a] blur-[130px] animate-blob opacity-75" />
+        <div className="absolute w-[500px] h-[500px] top-[20%] right-[-5%] rounded-full bg-[#e8a040] blur-[120px] animate-blob2 opacity-70" />
+        <div className="absolute w-[550px] h-[550px] bottom-[-10%] left-[20%] rounded-full bg-[#e04050] blur-[130px] animate-blob3 opacity-60" />
+        <div className="absolute w-[450px] h-[450px] top-[60%] left-[10%] rounded-full bg-[#d070a0] blur-[110px] animate-blob2 opacity-70" style={{ animationDelay: "2s" }} />
+        <div className="absolute w-[400px] h-[400px] top-[40%] right-[30%] rounded-full bg-[#e08050] blur-[100px] animate-blob opacity-60" style={{ animationDelay: "4s" }} />
+        <div className="absolute w-[500px] h-[500px] bottom-[10%] right-[-5%] rounded-full bg-[#c06090] blur-[120px] animate-blob3 opacity-65" style={{ animationDelay: "6s" }} />
       </div>
 
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-20 max-w-[900px]">
@@ -30,7 +30,7 @@ export default async function Home() {
         <div className="space-y-6 max-w-[350px]">
           <div>
             <h1 className="text-zinc-800 text-3xl whitespace-nowrap" style={{ fontFamily: "var(--font-dotmatrix)" }}>VaSol LDR Widget <span style={{ fontFamily: "system-ui" }}>🫰🏻</span></h1>
-            <p className="text-zinc-500 text-sm mt-2">Same sky, different city. A live widget to track time difference and remind us of our love that spans miles apart.</p>
+            <p className="text-zinc-700 text-sm mt-2">Same sky, different city. A live widget to track time difference and remind us of our love that spans miles apart.</p>
           </div>
 
           <div className="space-y-4">

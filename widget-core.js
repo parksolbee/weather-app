@@ -90,7 +90,7 @@ for (var i = 0; i < convo.length; i++) {
   msgText.textColor = Color.white();
   msgText.lineLimit = 1;
   row.addSpacer();
-  if (i === 0) widget.addSpacer(6);
+  if (i === 0) widget.addSpacer(10);
 }
 
 widget.addSpacer();
