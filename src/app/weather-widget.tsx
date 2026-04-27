@@ -88,7 +88,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
   }, []);
 
   return (
-    <div className="relative w-[400px] h-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111] flex flex-col">
+    <div className="relative w-[calc(100vw-40px)] max-w-[400px] aspect-square rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111] flex flex-col">
       {/* Fullscreen photo background */}
       <div className="absolute inset-0">
         {PHOTOS.map((src, i) => (
