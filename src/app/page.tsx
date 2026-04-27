@@ -29,7 +29,7 @@ export default async function Home() {
         {/* Left: Instructions */}
         <div className="space-y-6 max-w-[350px]">
           <div>
-            <h1 className="text-zinc-800 text-3xl whitespace-nowrap" style={{ fontFamily: "var(--font-dotmatrix)" }}>VaSol LDR Widget <span style={{ fontFamily: "system-ui" }}>🫰🏻</span></h1>
+            <h1 className="text-zinc-800 text-3xl" style={{ fontFamily: "var(--font-dotmatrix)" }}>VaSol LDR Widget<span style={{ fontFamily: "system-ui" }}> 🫰🏻</span></h1>
             <p className="text-zinc-700 text-sm mt-2">Same sky, different city. A live widget to track time difference and remind us of our love that spans miles apart.</p>
           </div>
 
