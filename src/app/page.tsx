@@ -14,7 +14,7 @@ export default async function Home() {
   const sfTemp = Math.round(sfData.current.temperature_2m);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#ffd6c0] p-6 overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center bg-[#ffd6c0] px-8 py-10 md:p-6 overflow-hidden">
       {/* Animated blob gradient background */}
       <div className="absolute inset-0 bg-[#f0c0b8]">
         <div className="absolute w-[600px] h-[600px] top-[-10%] left-[-10%] rounded-full bg-[#d0709a] blur-[130px] animate-blob opacity-75" />
