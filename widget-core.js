@@ -20,7 +20,9 @@ const bgImage = await imgReq.loadImage();
 
 const now = new Date();
 const londonTime = now.toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Europe/London" }).toUpperCase();
+const londonDate = now.toLocaleDateString("en-GB", { month: "short", day: "numeric", timeZone: "Europe/London" });
 const sfTime = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/Los_Angeles" }).toUpperCase();
+const sfDate = now.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/Los_Angeles" });
 
 const togetherSince = new Date("2025-12-27");
 const diffDays = Math.floor((now.getTime() - togetherSince.getTime()) / (1000 * 60 * 60 * 24));
@@ -80,7 +82,7 @@ citiesRow.spacing = 16;
 const londonStack = citiesRow.addStack();
 londonStack.layoutVertically();
 
-const londonLabel = londonStack.addText("London");
+const londonLabel = londonStack.addText("London  " + londonDate);
 londonLabel.font = Font.semiboldSystemFont(11);
 londonLabel.textColor = Color.white();
 londonLabel.shadowColor = shadow;
@@ -102,7 +104,7 @@ londonTempText.shadowRadius = 3;
 const sfStack = citiesRow.addStack();
 sfStack.layoutVertically();
 
-const sfLabel = sfStack.addText("San Francisco");
+const sfLabel = sfStack.addText("San Francisco  " + sfDate);
 sfLabel.font = Font.semiboldSystemFont(11);
 sfLabel.textColor = Color.white();
 sfLabel.shadowColor = shadow;
