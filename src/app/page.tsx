@@ -1,5 +1,6 @@
 import { WeatherWidget } from "./weather-widget";
 import { CopyButton } from "./copy-button";
+import { PageHearts } from "./page-hearts";
 
 const SCRIPT_URL = "https://raw.githubusercontent.com/parksolbee/weather-app/main/London%20Weather%20Widget.js";
 
@@ -14,31 +15,39 @@ export default async function Home() {
   const sfTemp = Math.round(sfData.current.temperature_2m);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-900 p-6">
-      <div className="flex flex-col md:flex-row items-center gap-20 max-w-[900px]">
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#2d1b2e] via-[#1f1a2e] to-[#1a1520] p-6 overflow-hidden">
+      {/* Warm glowing orbs */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#e8a0bf]/15 blur-[120px]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#f4c28f]/10 blur-[120px]" />
+      <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-[#d4a0c0]/8 blur-[100px]" />
+
+      {/* Floating hearts */}
+      <PageHearts />
+
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-20 max-w-[900px]">
         {/* Left: Instructions */}
         <div className="space-y-6 max-w-[350px]">
-          <h1 className="text-white text-2xl font-bold">VaSol Weather Widget &lt;3</h1>
-          <p className="text-zinc-400 text-sm">
-            A live weather widget for your iPhone home screen.
-          </p>
+          <div>
+            <h1 className="text-white text-3xl font-bold">⛅ VaSol Weather Widget</h1>
+            <p className="text-white/60 text-sm mt-2">Same sky, different cities — a live weather widget for your iPhone home screen.</p>
+          </div>
 
           <div className="space-y-4">
             <div className="flex gap-3">
-              <span className="text-white font-bold text-sm shrink-0">1.</span>
-              <p className="text-zinc-300 text-sm">
-                Download <a href="https://apps.apple.com/app/scriptable/id1405459188" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Scriptable</a> from the App Store on your iPhone (free)
+              <span className="text-[#f4c28f] font-bold text-sm shrink-0">1.</span>
+              <p className="text-white/80 text-sm">
+                Download <a href="https://apps.apple.com/app/scriptable/id1405459188" className="text-[#e8a0bf] underline" target="_blank" rel="noopener noreferrer">Scriptable</a> from the App Store on your iPhone (free)
               </p>
             </div>
             <div className="flex gap-3">
-              <span className="text-white font-bold text-sm shrink-0">2.</span>
-              <p className="text-zinc-300 text-sm">
+              <span className="text-[#f4c28f] font-bold text-sm shrink-0">2.</span>
+              <p className="text-white/80 text-sm">
                 Create new script (+) in Scriptable and copy and paste the script below
               </p>
             </div>
             <div className="flex gap-3">
-              <span className="text-white font-bold text-sm shrink-0">3.</span>
-              <p className="text-zinc-300 text-sm">
+              <span className="text-[#f4c28f] font-bold text-sm shrink-0">3.</span>
+              <p className="text-white/80 text-sm">
                 Long press your home screen, tap &quot;Edit,&quot; search &quot;Add Widget,&quot; find &quot;Scriptable&quot; then edit it to choose this script
               </p>
             </div>
@@ -48,7 +57,9 @@ export default async function Home() {
         </div>
 
         {/* Right: Widget preview */}
-        <WeatherWidget londonTemp={londonTemp} sfTemp={sfTemp} />
+        <div className="rounded-[20px] shadow-[0_0_60px_rgba(232,160,191,0.15)]">
+          <WeatherWidget londonTemp={londonTemp} sfTemp={sfTemp} />
+        </div>
       </div>
     </div>
   );

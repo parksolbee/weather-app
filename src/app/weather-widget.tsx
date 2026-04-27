@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Rain } from "./rain";
+import { WidgetClouds } from "./widget-clouds";
 
 const PHOTOS = ["/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
 const TOGETHER_SINCE = new Date("2025-12-27");
@@ -24,30 +24,39 @@ function getTogetherText() {
   return { count: `${days}`, label: "Days ago", date: "Dec 27, 2025" };
 }
 
-function useTime(timezone: string) {
+function useTimeAndDate(timezone: string) {
   const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
   useEffect(() => {
     function update() {
+      const now = new Date();
       setTime(
-        new Date().toLocaleTimeString("en-GB", {
+        now.toLocaleTimeString("en-GB", {
           hour: "numeric",
           minute: "2-digit",
           hour12: true,
           timeZone: timezone,
         }).toUpperCase()
       );
+      setDate(
+        now.toLocaleDateString("en-GB", {
+          month: "short",
+          day: "numeric",
+          timeZone: timezone,
+        })
+      );
     }
     update();
     const id = setInterval(update, 1000);
     return () => clearInterval(id);
   }, [timezone]);
-  return time;
+  return { time, date };
 }
 
 export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTemp: number }) {
   const [photoIndex, setPhotoIndex] = useState(0);
-  const londonTime = useTime("Europe/London");
-  const sfTime = useTime("America/Los_Angeles");
+  const london = useTimeAndDate("Europe/London");
+  const sf = useTimeAndDate("America/Los_Angeles");
   const together = getTogetherText();
 
   useEffect(() => {
@@ -76,8 +85,9 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Hearts */}
-      <Rain />
+      {/* Floating clouds */}
+      <WidgetClouds />
+
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between h-full p-8">
@@ -92,15 +102,15 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         <div className="flex gap-6">
           {/* London */}
           <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">London</p>
-            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{londonTime}</p>
+            <p className="text-white font-semibold text-[14px] drop-shadow-md">London <span className="text-white/60 text-[11px]">{london.date}</span></p>
+            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{london.time}</p>
             <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{londonTemp}°</p>
           </div>
 
           {/* San Francisco */}
           <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">San Francisco</p>
-            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{sfTime}</p>
+            <p className="text-white font-semibold text-[14px] drop-shadow-md">San Francisco <span className="text-white/60 text-[11px]">{sf.date}</span></p>
+            <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{sf.time}</p>
             <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{sfTemp}°</p>
           </div>
         </div>
