@@ -6,6 +6,14 @@ const PHOTOS = [
   "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo6.png",
 ];
 
+const MESSAGES = [
+  "Dreaming of you",
+  "You can rely on Vasu \u2764\uFE0F",
+  "I'm a ddongjaengyi \uD83D\uDCA9",
+  "You're the love of my life",
+  "You're my everything",
+];
+
 const photoIndex = Math.floor(Date.now() / (10 * 60 * 1000)) % PHOTOS.length;
 
 const londonReq = new Request("https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current=temperature_2m&timezone=Europe%2FLondon");
@@ -66,6 +74,22 @@ togetherCount.shadowColor = shadow;
 togetherCount.shadowRadius = 3;
 
 widget.addSpacer();
+
+// iMessage bubble
+const bubbleRow = widget.addStack();
+bubbleRow.layoutHorizontally();
+const bubble = bubbleRow.addStack();
+bubble.backgroundColor = new Color("#fff", 0.2);
+bubble.cornerRadius = 14;
+bubble.setPadding(6, 12, 6, 12);
+const msgText = bubble.addText(MESSAGES[photoIndex]);
+msgText.font = Font.systemFont(12);
+msgText.textColor = Color.white();
+msgText.shadowColor = shadow;
+msgText.shadowRadius = 2;
+bubbleRow.addSpacer();
+
+widget.addSpacer(6);
 
 // Cities row (bottom)
 const citiesRow = widget.addStack();

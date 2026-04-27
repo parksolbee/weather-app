@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import { WidgetClouds } from "./widget-clouds";
 
 const PHOTOS = ["/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
+const MESSAGES = [
+  "Dreaming of you",
+  "You can rely on Vasu ❤️",
+  "I'm a ddongjaengyi 💩",
+  "You're the love of my life",
+  "You're my everything",
+];
 const TOGETHER_SINCE = new Date("2025-12-27");
 
 function getTogetherText() {
@@ -95,6 +102,13 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         <div>
           <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
           <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
+        </div>
+
+        {/* iMessage bubble */}
+        <div className="flex justify-start">
+          <div className="bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] shadow-lg">
+            <p className="text-white text-[14px]">{MESSAGES[photoIndex]}</p>
+          </div>
         </div>
 
         {/* Cities row */}
