@@ -18,17 +18,17 @@ function getTogetherText() {
   const diff = now.getTime() - TOGETHER_SINCE.getTime();
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-  if (days < 0) return { count: "Not yet!", label: "", date: "Dec 27, 2025" };
-  if (days < 7) return { count: `${days}`, label: days === 1 ? "Day ago" : "Days ago", date: "Dec 27, 2025" };
+  if (days < 0) return { count: "Not yet!", label: "" };
+  if (days < 7) return { count: `${days}`, label: days === 1 ? "day" : "days" };
   if (days < 30) {
     const weeks = Math.floor(days / 7);
-    return { count: `${weeks}`, label: weeks === 1 ? "Week ago" : "Weeks ago", date: "Dec 27, 2025" };
+    return { count: `${weeks}`, label: weeks === 1 ? "week" : "weeks" };
   }
   if (days < 365) {
     const months = Math.floor(days / 30);
-    return { count: `${months}`, label: months === 1 ? "Month ago" : "Months ago", date: "Dec 27, 2025" };
+    return { count: `${months}`, label: months === 1 ? "month" : "months" };
   }
-  return { count: `${days}`, label: "Days ago", date: "Dec 27, 2025" };
+  return { count: `${days}`, label: "days" };
 }
 
 function useTimeAndDate(timezone: string) {
@@ -98,16 +98,14 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between h-full p-8">
-        {/* Together since */}
+        {/* Together since + message */}
         <div>
           <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
           <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
-        </div>
-
-        {/* iMessage bubble */}
-        <div className="flex justify-start">
-          <div className="bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] shadow-lg">
-            <p className="text-white text-[14px]">{MESSAGES[photoIndex]}</p>
+          <div className="flex justify-start mt-2">
+            <div className="bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] shadow-lg">
+              <p className="text-white text-[14px]">{MESSAGES[photoIndex]}</p>
+            </div>
           </div>
         </div>
 

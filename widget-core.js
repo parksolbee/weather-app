@@ -38,15 +38,15 @@ let togetherLabel;
 if (diffDays < 0) {
   togetherLabel = "Not yet!";
 } else if (diffDays < 7) {
-  togetherLabel = diffDays + (diffDays === 1 ? " Day ago" : " Days ago");
+  togetherLabel = diffDays + (diffDays === 1 ? " day" : " days");
 } else if (diffDays < 30) {
   const weeks = Math.floor(diffDays / 7);
-  togetherLabel = weeks + (weeks === 1 ? " Week ago" : " Weeks ago");
+  togetherLabel = weeks + (weeks === 1 ? " week" : " weeks");
 } else if (diffDays < 365) {
   const months = Math.floor(diffDays / 30);
-  togetherLabel = months + (months === 1 ? " Month ago" : " Months ago");
+  togetherLabel = months + (months === 1 ? " month" : " months");
 } else {
-  togetherLabel = diffDays + " Days ago";
+  togetherLabel = diffDays + " days";
 }
 
 const widget = new ListWidget();
@@ -73,8 +73,6 @@ togetherCount.textColor = Color.white();
 togetherCount.shadowColor = shadow;
 togetherCount.shadowRadius = 3;
 
-widget.addSpacer();
-
 // iMessage bubble
 const bubbleRow = widget.addStack();
 bubbleRow.layoutHorizontally();
@@ -89,7 +87,7 @@ msgText.shadowColor = shadow;
 msgText.shadowRadius = 2;
 bubbleRow.addSpacer();
 
-widget.addSpacer(6);
+widget.addSpacer();
 
 // Cities row (bottom)
 const citiesRow = widget.addStack();
