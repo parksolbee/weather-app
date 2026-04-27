@@ -119,7 +119,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         {/* Bottom: Two city cards */}
         <div className="flex gap-3">
         {/* London */}
-        <div className="flex-1 bg-black/5 rounded-2xl p-4">
+        <div className="flex-1 bg-black/10 backdrop-blur-sm rounded-2xl p-4">
           <div className="flex items-center gap-1.5 mb-2">
             <span className="text-[14px]">🫖</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">London</p>
@@ -132,7 +132,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         </div>
 
         {/* San Francisco */}
-        <div className="flex-1 bg-black/5 rounded-2xl p-4">
+        <div className="flex-1 bg-black/10 backdrop-blur-sm rounded-2xl p-4">
           <div className="flex items-center gap-1.5 mb-2">
             <span className="text-[14px]">🌁</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">San Francisco</p>

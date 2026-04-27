@@ -50,18 +50,17 @@ if (diffDays < 0) {
 }
 
 var widget = new ListWidget();
-widget.setPadding(16, 16, 16, 16);
+widget.setPadding(14, 16, 14, 16);
 widget.backgroundImage = bgImage;
 
-// Dark overlay gradient
 var gradient = new LinearGradient();
-gradient.locations = [0, 0.4, 1];
-gradient.colors = [new Color("#000", 0.2), new Color("#000", 0.3), new Color("#000", 0.7)];
+gradient.locations = [0, 0.35, 1];
+gradient.colors = [new Color("#000", 0.15), new Color("#000", 0.25), new Color("#000", 0.65)];
 widget.backgroundGradient = gradient;
 
 var shadow = new Color("#000", 0.6);
 
-// Together since (no background box)
+// Together since
 var togetherTitle = widget.addText("Together since");
 togetherTitle.font = Font.boldSystemFont(13);
 togetherTitle.textColor = Color.white();
@@ -74,15 +73,14 @@ togetherSub.textColor = new Color("#fff", 0.6);
 togetherSub.shadowColor = shadow;
 togetherSub.shadowRadius = 3;
 
-widget.addSpacer(6);
+widget.addSpacer(8);
 
-// Messages
+// Messages - left aligned
 var convo = CONVOS[photoIndex];
 for (var i = 0; i < convo.length; i++) {
   var msg = convo[i];
   var row = widget.addStack();
   row.layoutHorizontally();
-  if (msg.from === "sb") row.addSpacer();
   var bubble = row.addStack();
   bubble.backgroundColor = msg.from === "sb" ? new Color("#9b4d6e", 0.9) : new Color("#000", 0.5);
   bubble.cornerRadius = 12;
@@ -91,28 +89,29 @@ for (var i = 0; i < convo.length; i++) {
   msgText.font = Font.systemFont(11);
   msgText.textColor = Color.white();
   msgText.lineLimit = 1;
-  if (msg.from === "vas") row.addSpacer();
+  row.addSpacer();
+  if (i === 0) widget.addSpacer(2);
 }
 
 widget.addSpacer();
 
-// City cards row - centered
+// Cities - both left aligned, side by side
 var citiesRow = widget.addStack();
 citiesRow.layoutHorizontally();
-citiesRow.spacing = 12;
+citiesRow.spacing = 20;
 
 // London
 var londonCard = citiesRow.addStack();
 londonCard.layoutVertically();
 
 var londonLabel = londonCard.addText("🫖 LONDON · " + londonDate);
-londonLabel.font = Font.semiboldSystemFont(10);
+londonLabel.font = Font.semiboldSystemFont(9);
 londonLabel.textColor = new Color("#fff", 0.6);
 londonLabel.shadowColor = shadow;
 londonLabel.shadowRadius = 3;
 
 var londonTimeText = londonCard.addText(londonTime);
-londonTimeText.font = Font.boldMonospacedSystemFont(22);
+londonTimeText.font = Font.boldMonospacedSystemFont(24);
 londonTimeText.textColor = Color.white();
 londonTimeText.shadowColor = shadow;
 londonTimeText.shadowRadius = 3;
@@ -123,20 +122,18 @@ londonTempText.textColor = new Color("#e8a0bf", 1);
 londonTempText.shadowColor = shadow;
 londonTempText.shadowRadius = 3;
 
-citiesRow.addSpacer();
-
 // SF
 var sfCard = citiesRow.addStack();
 sfCard.layoutVertically();
 
 var sfLabel = sfCard.addText("🌁 SF · " + sfDate);
-sfLabel.font = Font.semiboldSystemFont(10);
+sfLabel.font = Font.semiboldSystemFont(9);
 sfLabel.textColor = new Color("#fff", 0.6);
 sfLabel.shadowColor = shadow;
 sfLabel.shadowRadius = 3;
 
 var sfTimeText = sfCard.addText(sfTime);
-sfTimeText.font = Font.boldMonospacedSystemFont(22);
+sfTimeText.font = Font.boldMonospacedSystemFont(24);
 sfTimeText.textColor = Color.white();
 sfTimeText.shadowColor = shadow;
 sfTimeText.shadowRadius = 3;
@@ -146,6 +143,8 @@ sfTempText.font = Font.boldMonospacedSystemFont(16);
 sfTempText.textColor = new Color("#e8a0bf", 1);
 sfTempText.shadowColor = shadow;
 sfTempText.shadowRadius = 3;
+
+citiesRow.addSpacer();
 
 if (config.runsInWidget) {
   Script.setWidget(widget);
