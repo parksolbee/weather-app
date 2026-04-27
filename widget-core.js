@@ -55,7 +55,7 @@ widget.backgroundImage = bgImage;
 
 var gradient = new LinearGradient();
 gradient.locations = [0, 0.35, 1];
-gradient.colors = [new Color("#000", 0.15), new Color("#000", 0.25), new Color("#000", 0.65)];
+gradient.colors = [new Color("#000", 0.35), new Color("#000", 0.4), new Color("#000", 0.7)];
 widget.backgroundGradient = gradient;
 
 var shadow = new Color("#000", 0.6);
