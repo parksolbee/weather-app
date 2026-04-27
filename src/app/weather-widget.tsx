@@ -160,14 +160,14 @@ function MessageBubbles({ convo, photoIndex }: { convo: { from: string; text: st
   }, [photoIndex]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       {convo.map((msg, i) => (
         <div
           key={`${photoIndex}-${i}`}
           className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"} transition-all duration-500 ${i < visibleCount ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
         >
-          <div className={`${msg.from === "sb" ? "bg-[#9b4d6e] rounded-2xl rounded-br-sm" : "bg-black/50 backdrop-blur-sm rounded-2xl rounded-bl-sm"} inline-block px-3 py-1.5`}>
-            <p className="text-white text-[12px] whitespace-nowrap">{msg.text}</p>
+          <div className={`${msg.from === "sb" ? "bg-[#9b4d6e] rounded-[18px] rounded-br-[4px]" : "bg-black/50 backdrop-blur-sm rounded-[18px] rounded-bl-[4px]"} inline-block px-4 py-2`}>
+            <p className="text-white text-[14px] whitespace-nowrap">{msg.text}</p>
           </div>
         </div>
       ))}

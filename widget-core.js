@@ -83,14 +83,14 @@ for (var i = 0; i < convo.length; i++) {
   row.layoutHorizontally();
   var bubble = row.addStack();
   bubble.backgroundColor = msg.from === "sb" ? new Color("#9b4d6e", 0.9) : new Color("#000", 0.5);
-  bubble.cornerRadius = 14;
-  bubble.setPadding(5, 12, 5, 12);
+  bubble.cornerRadius = 18;
+  bubble.setPadding(8, 14, 8, 14);
   var msgText = bubble.addText(msg.text);
-  msgText.font = Font.regularRoundedSystemFont(13);
+  msgText.font = Font.regularRoundedSystemFont(14);
   msgText.textColor = Color.white();
   msgText.lineLimit = 1;
   row.addSpacer();
-  if (i === 0) widget.addSpacer(3);
+  if (i === 0) widget.addSpacer(6);
 }
 
 widget.addSpacer();
