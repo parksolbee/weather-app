@@ -15,7 +15,7 @@ export default async function Home() {
   const sfTemp = Math.round(sfData.current.temperature_2m);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#0a0a0a] p-6 overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center bg-[#1a0f14] p-6 overflow-hidden">
       {/* Subtle warm glows */}
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#e8a0bf]/8 blur-[150px]" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-[#e8a0bf]/5 blur-[150px]" />
@@ -27,8 +27,8 @@ export default async function Home() {
         {/* Left: Instructions */}
         <div className="space-y-6 max-w-[350px]">
           <div>
-            <h1 className="text-white text-3xl font-bold">⛅ VaSol LDR Widget</h1>
-            <p className="text-white/60 text-sm mt-2">Same sky, different cities — a live weather widget for your iPhone home screen.</p>
+            <h1 className="text-white text-3xl font-bold">VaSol LDR Widget 🫰🏻</h1>
+            <p className="text-white/60 text-sm mt-2">Same sky, different city. A live widget to track time difference and remind us of our love that spans miles apart.</p>
           </div>
 
           <div className="space-y-4">

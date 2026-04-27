@@ -36,7 +36,7 @@ export function PageHearts() {
           opacity,
         }}
       >
-        ⛅
+        {i % 2 === 0 ? "🌞" : "💗"}
       </div>
     );
   });

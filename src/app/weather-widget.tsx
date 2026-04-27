@@ -89,10 +89,16 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
 
   return (
     <div className="relative w-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111]">
-      {/* Top: Photo + Together */}
-      <div className="flex items-center gap-4 p-5 pb-3">
+      {/* Top: Together since */}
+      <div className="p-5 pb-3">
+        <p className="text-[#e8a0bf] text-[11px] font-semibold uppercase tracking-wider">Together since Dec 27, 2025</p>
+        <p className="text-white font-bold text-[22px] leading-tight">{together.count} {together.label}</p>
+      </div>
+
+      {/* Photo + Messages row */}
+      <div className="flex items-center gap-3 px-5 pb-3">
         {/* Rotating photo */}
-        <div className="relative w-[120px] h-[120px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
+        <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
           {PHOTOS.map((src, i) => (
             <img
               key={src}
@@ -103,16 +109,10 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             />
           ))}
         </div>
+        {/* Messages */}
         <div className="flex-1 min-w-0">
-          <p className="text-[#e8a0bf] text-[11px] font-semibold uppercase tracking-wider">Together since</p>
-          <p className="text-white font-bold text-[22px] leading-tight">{together.count} {together.label}</p>
-          <p className="text-white/40 text-[11px]">Dec 27, 2025</p>
+          <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
         </div>
-      </div>
-
-      {/* Messages */}
-      <div className="px-5 pb-3">
-        <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
       </div>
 
       {/* Divider */}
@@ -126,9 +126,9 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             <span className="text-[14px]">🫖</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">London</p>
           </div>
-          <p className="text-white font-bold text-[28px] leading-none tracking-[-1px]">{london.time}</p>
+          <p className="text-white text-[28px] leading-none" style={{ fontFamily: "var(--font-dotmatrix)" }}>{london.time}</p>
           <div className="flex items-baseline gap-2 mt-1.5">
-            <p className="text-[#e8a0bf] font-bold text-[18px]">{londonTemp}°</p>
+            <p className="text-[#e8a0bf] text-[20px]" style={{ fontFamily: "var(--font-dotmatrix)" }}>{londonTemp}°</p>
             <p className="text-white/30 text-[11px]">{london.date}</p>
           </div>
         </div>
@@ -139,9 +139,9 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             <span className="text-[14px]">🌁</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">San Francisco</p>
           </div>
-          <p className="text-white font-bold text-[28px] leading-none tracking-[-1px]">{sf.time}</p>
+          <p className="text-white text-[28px] leading-none" style={{ fontFamily: "var(--font-dotmatrix)" }}>{sf.time}</p>
           <div className="flex items-baseline gap-2 mt-1.5">
-            <p className="text-[#e8a0bf] font-bold text-[18px]">{sfTemp}°</p>
+            <p className="text-[#e8a0bf] text-[20px]" style={{ fontFamily: "var(--font-dotmatrix)" }}>{sfTemp}°</p>
             <p className="text-white/30 text-[11px]">{sf.date}</p>
           </div>
         </div>

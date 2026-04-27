@@ -16,9 +16,9 @@ export function CopyButton({ scriptUrl }: { scriptUrl: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="w-full py-3 px-6 bg-gradient-to-r from-[#e8a0bf] to-[#f4c28f] text-[#1a1520] font-semibold text-sm rounded-xl hover:opacity-90 transition-opacity"
+      className="w-full py-4 px-6 bg-transparent text-[#e8a0bf] font-semibold text-sm uppercase tracking-wider rounded-full border border-[#e8a0bf]/30 hover:border-[#e8a0bf]/60 hover:bg-[#e8a0bf]/5 transition-all"
     >
-      {copied ? "Copied!" : "Copy Script"}
+      {copied ? "COPIED!" : "COPY SCRIPT"}
     </button>
   );
 }
