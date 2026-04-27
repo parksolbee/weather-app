@@ -6,12 +6,12 @@ const PHOTOS = [
   "https://raw.githubusercontent.com/parksolbee/weather-app/main/public/photo6.png",
 ];
 
-const MESSAGES = [
-  "Dreaming of you",
-  "You can rely on Vasu \u2764\uFE0F",
-  "I'm a ddongjaengyi \uD83D\uDCA9",
-  "You're the love of my life",
-  "You're my everything",
+const CONVOS = [
+  [{ from: "sb", text: "Dreaming of you \uD83D\uDCAD\uD83E\uDEF6\uD83C\uDFFB" }, { from: "vas", text: "See you in the dreams" }],
+  [{ from: "vas", text: "You can rely on Vasu \u2764\uFE0F" }, { from: "sb", text: "Nawww love you boo" }],
+  [{ from: "vas", text: "I'm a ddongjaengyi \uD83D\uDCA9" }, { from: "sb", text: "You're my favorite ddongjaengyi" }],
+  [{ from: "sb", text: "You're the love of my life" }, { from: "vas", text: "And you are mine" }],
+  [{ from: "vas", text: "You're my everything" }, { from: "sb", text: "And I am yours" }],
 ];
 
 const photoIndex = Math.floor(Date.now() / (10 * 60 * 1000)) % PHOTOS.length;
@@ -73,19 +73,23 @@ togetherCount.textColor = Color.white();
 togetherCount.shadowColor = shadow;
 togetherCount.shadowRadius = 3;
 
-// iMessage bubble
-const bubbleRow = widget.addStack();
-bubbleRow.layoutHorizontally();
-const bubble = bubbleRow.addStack();
-bubble.backgroundColor = new Color("#fff", 0.2);
-bubble.cornerRadius = 14;
-bubble.setPadding(6, 12, 6, 12);
-const msgText = bubble.addText(MESSAGES[photoIndex]);
-msgText.font = Font.systemFont(12);
-msgText.textColor = Color.white();
-msgText.shadowColor = shadow;
-msgText.shadowRadius = 2;
-bubbleRow.addSpacer();
+// iMessage conversation
+const convo = CONVOS[photoIndex];
+for (const msg of convo) {
+  const row = widget.addStack();
+  row.layoutHorizontally();
+  if (msg.from === "sb") row.addSpacer();
+  const bubble = row.addStack();
+  bubble.backgroundColor = msg.from === "sb" ? new Color("#007AFF", 1) : new Color("#fff", 0.2);
+  bubble.cornerRadius = 12;
+  bubble.setPadding(4, 10, 4, 10);
+  const msgText = bubble.addText(msg.text);
+  msgText.font = Font.systemFont(11);
+  msgText.textColor = Color.white();
+  msgText.shadowColor = shadow;
+  msgText.shadowRadius = 2;
+  if (msg.from === "vas") row.addSpacer();
+}
 
 widget.addSpacer();
 

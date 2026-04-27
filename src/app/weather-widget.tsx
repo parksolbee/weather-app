@@ -4,12 +4,27 @@ import { useState, useEffect } from "react";
 import { WidgetClouds } from "./widget-clouds";
 
 const PHOTOS = ["/photo2.png", "/photo3.png", "/photo4.png", "/photo5.png", "/photo6.png"];
-const MESSAGES = [
-  "Dreaming of you",
-  "You can rely on Vasu ❤️",
-  "I'm a ddongjaengyi 💩",
-  "You're the love of my life",
-  "You're my everything",
+const CONVOS = [
+  [
+    { from: "sb", text: "Dreaming of you 💭🫶🏼" },
+    { from: "vas", text: "See you in the dreams" },
+  ],
+  [
+    { from: "vas", text: "You can rely on Vasu ❤️" },
+    { from: "sb", text: "Nawww love you boo" },
+  ],
+  [
+    { from: "vas", text: "I'm a ddongjaengyi 💩" },
+    { from: "sb", text: "You're my favorite ddongjaengyi" },
+  ],
+  [
+    { from: "sb", text: "You're the love of my life" },
+    { from: "vas", text: "And you are mine" },
+  ],
+  [
+    { from: "vas", text: "You're my everything" },
+    { from: "sb", text: "And I am yours" },
+  ],
 ];
 const TOGETHER_SINCE = new Date("2025-12-27");
 
@@ -102,10 +117,14 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         <div>
           <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
           <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
-          <div className="flex justify-start mt-2">
-            <div className="bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] shadow-lg">
-              <p className="text-white text-[14px]">{MESSAGES[photoIndex]}</p>
-            </div>
+          <div className="flex flex-col gap-1.5 mt-2">
+            {CONVOS[photoIndex].map((msg, i) => (
+              <div key={i} className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"}`}>
+                <div className={`${msg.from === "sb" ? "bg-[#007AFF] rounded-2xl rounded-br-sm" : "bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[75%] shadow-lg`}>
+                  <p className="text-white text-[13px]">{msg.text}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
