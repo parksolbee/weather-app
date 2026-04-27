@@ -20,7 +20,7 @@ const bgImage = await imgReq.loadImage();
 
 const now = new Date();
 const londonTime = now.toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Europe/London" }).toUpperCase();
-const londonDate = now.toLocaleDateString("en-GB", { month: "short", day: "numeric", timeZone: "Europe/London" });
+const londonDate = now.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "Europe/London" });
 const sfTime = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "America/Los_Angeles" }).toUpperCase();
 const sfDate = now.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/Los_Angeles" });
 

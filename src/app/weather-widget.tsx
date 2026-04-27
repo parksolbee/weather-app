@@ -39,7 +39,7 @@ function useTimeAndDate(timezone: string) {
         }).toUpperCase()
       );
       setDate(
-        now.toLocaleDateString("en-GB", {
+        now.toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           timeZone: timezone,
