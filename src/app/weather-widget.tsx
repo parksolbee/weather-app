@@ -124,7 +124,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             <span className="text-[14px]">🫖</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">London</p>
           </div>
-          <p className="text-white text-[28px] leading-none" style={{ fontFamily: "var(--font-dotmatrix)" }}>{london.time}</p>
+          <p className="text-white text-[24px] leading-none whitespace-nowrap" style={{ fontFamily: "var(--font-dotmatrix)" }}>{london.time}</p>
           <div className="flex items-baseline gap-2 mt-1.5">
             <p className="text-[#e8a0bf] text-[20px]" style={{ fontFamily: "var(--font-dotmatrix)" }}>{londonTemp}°</p>
             <p className="text-white/30 text-[11px]">{london.date}</p>
@@ -137,7 +137,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
             <span className="text-[14px]">🌁</span>
             <p className="text-white/50 text-[11px] font-semibold uppercase tracking-wider">San Francisco</p>
           </div>
-          <p className="text-white text-[28px] leading-none" style={{ fontFamily: "var(--font-dotmatrix)" }}>{sf.time}</p>
+          <p className="text-white text-[24px] leading-none whitespace-nowrap" style={{ fontFamily: "var(--font-dotmatrix)" }}>{sf.time}</p>
           <div className="flex items-baseline gap-2 mt-1.5">
             <p className="text-[#e8a0bf] text-[20px]" style={{ fontFamily: "var(--font-dotmatrix)" }}>{sfTemp}°</p>
             <p className="text-white/30 text-[11px]">{sf.date}</p>

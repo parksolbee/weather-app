@@ -35,20 +35,20 @@ export default async function Home() {
 
           <div className="space-y-4">
             <div className="flex gap-3">
-              <span className="text-zinc-700 font-bold text-sm shrink-0">1.</span>
-              <p className="text-zinc-600 text-sm">
+              <span className="text-black font-bold text-sm shrink-0">1.</span>
+              <p className="text-black text-sm">
                 Download <a href="https://apps.apple.com/app/scriptable/id1405459188" className="text-[#9b4d6e] underline" target="_blank" rel="noopener noreferrer">Scriptable</a> from the App Store on your iPhone (free)
               </p>
             </div>
             <div className="flex gap-3">
-              <span className="text-zinc-700 font-bold text-sm shrink-0">2.</span>
-              <p className="text-zinc-600 text-sm">
+              <span className="text-black font-bold text-sm shrink-0">2.</span>
+              <p className="text-black text-sm">
                 Create new script (+) in Scriptable and copy and paste the script below
               </p>
             </div>
             <div className="flex gap-3">
-              <span className="text-zinc-700 font-bold text-sm shrink-0">3.</span>
-              <p className="text-zinc-600 text-sm">
+              <span className="text-black font-bold text-sm shrink-0">3.</span>
+              <p className="text-black text-sm">
                 Long press your home screen, tap &quot;Edit,&quot; search &quot;Add Widget,&quot; find &quot;Scriptable&quot; then edit it to choose this script
               </p>
             </div>
