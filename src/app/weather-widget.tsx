@@ -102,14 +102,14 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         <div className="flex gap-6">
           {/* London */}
           <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">London <span className="text-white/60 text-[11px]">{london.date}</span></p>
+            <p className="text-white font-semibold text-[14px] drop-shadow-md">🫖 London <span className="text-white/60 text-[11px]">{london.date}</span></p>
             <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{london.time}</p>
             <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{londonTemp}°</p>
           </div>
 
           {/* San Francisco */}
           <div>
-            <p className="text-white font-semibold text-[14px] drop-shadow-md">San Francisco <span className="text-white/60 text-[11px]">{sf.date}</span></p>
+            <p className="text-white font-semibold text-[14px] drop-shadow-md">🌁 San Francisco <span className="text-white/60 text-[11px]">{sf.date}</span></p>
             <p className="text-white font-bold text-[28px] leading-none tracking-[-1px] drop-shadow-md">{sf.time}</p>
             <p className="text-white font-semibold text-[18px] drop-shadow-md mt-1">{sfTemp}°</p>
           </div>

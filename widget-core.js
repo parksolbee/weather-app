@@ -82,7 +82,7 @@ citiesRow.spacing = 16;
 const londonStack = citiesRow.addStack();
 londonStack.layoutVertically();
 
-const londonLabel = londonStack.addText("London  " + londonDate);
+const londonLabel = londonStack.addText("\uD83E\uDED6 London  " + londonDate);
 londonLabel.font = Font.semiboldSystemFont(11);
 londonLabel.textColor = Color.white();
 londonLabel.shadowColor = shadow;
@@ -104,7 +104,7 @@ londonTempText.shadowRadius = 3;
 const sfStack = citiesRow.addStack();
 sfStack.layoutVertically();
 
-const sfLabel = sfStack.addText("San Francisco  " + sfDate);
+const sfLabel = sfStack.addText("\uD83C\uDF01 San Francisco  " + sfDate);
 sfLabel.font = Font.semiboldSystemFont(11);
 sfLabel.textColor = Color.white();
 sfLabel.shadowColor = shadow;
