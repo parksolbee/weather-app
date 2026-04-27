@@ -63,7 +63,7 @@ const togetherSub = widget.addText("Dec 27, 2025 \u00B7 " + togetherLabel);
 togetherSub.font = Font.systemFont(11);
 togetherSub.textColor = new Color("#fff", 0.4);
 
-widget.addSpacer(6);
+widget.addSpacer(4);
 
 // Photo + messages row
 const midRow = widget.addStack();
@@ -73,12 +73,12 @@ midRow.spacing = 10;
 
 // Photo
 const photoStack = midRow.addStack();
-photoStack.size = new Size(60, 60);
-photoStack.cornerRadius = 30;
+photoStack.size = new Size(70, 70);
+photoStack.cornerRadius = 35;
 photoStack.borderWidth = 2;
 photoStack.borderColor = new Color("#e8a0bf", 0.4);
 const photo = photoStack.addImage(bgImage);
-photo.imageSize = new Size(60, 60);
+photo.imageSize = new Size(70, 70);
 photo.containerRelativeShape = true;
 
 // Messages
@@ -102,7 +102,7 @@ for (const msg of convo) {
   if (msg.from === "vas") row.addSpacer();
 }
 
-widget.addSpacer();
+widget.addSpacer(6);
 
 // City cards row
 const citiesRow = widget.addStack();
@@ -140,8 +140,6 @@ londonTempText.textColor = new Color("#e8a0bf", 1);
 const londonDateText = londonInfo.addText(londonDate);
 londonDateText.font = Font.systemFont(9);
 londonDateText.textColor = new Color("#fff", 0.3);
-
-citiesRow.addSpacer();
 
 // SF card
 const sfCard = citiesRow.addStack();
