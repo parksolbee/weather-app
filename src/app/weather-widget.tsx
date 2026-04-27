@@ -117,15 +117,7 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
         <div>
           <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
           <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
-          <div className="flex flex-col gap-1.5 mt-2">
-            {CONVOS[photoIndex].map((msg, i) => (
-              <div key={i} className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"}`}>
-                <div className={`${msg.from === "sb" ? "bg-[#007AFF] rounded-2xl rounded-br-sm" : "bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[75%] shadow-lg`}>
-                  <p className="text-white text-[13px]">{msg.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <MessageBubbles convo={CONVOS[photoIndex]} photoIndex={photoIndex} />
         </div>
 
         {/* Cities row */}
@@ -145,6 +137,32 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function MessageBubbles({ convo, photoIndex }: { convo: { from: string; text: string }[]; photoIndex: number }) {
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  useEffect(() => {
+    setVisibleCount(0);
+    const t1 = setTimeout(() => setVisibleCount(1), 500);
+    const t2 = setTimeout(() => setVisibleCount(2), 1800);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [photoIndex]);
+
+  return (
+    <div className="flex flex-col gap-1.5 mt-2">
+      {convo.map((msg, i) => (
+        <div
+          key={`${photoIndex}-${i}`}
+          className={`flex ${msg.from === "sb" ? "justify-end" : "justify-start"} transition-all duration-500 ${i < visibleCount ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+        >
+          <div className={`${msg.from === "sb" ? "bg-[#007AFF] rounded-2xl rounded-br-sm" : "bg-white/20 backdrop-blur-md rounded-2xl rounded-bl-sm"} px-3 py-1.5 max-w-[75%] shadow-lg`}>
+            <p className="text-white text-[13px]">{msg.text}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
