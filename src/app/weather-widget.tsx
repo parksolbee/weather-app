@@ -93,9 +93,8 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
       <div className="relative z-10 flex flex-col justify-between h-full p-8">
         {/* Together since */}
         <div>
-          <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since</p>
+          <p className="text-white font-semibold text-[14px] drop-shadow-md">Together since Dec 27, 2025</p>
           <p className="text-white font-bold text-[18px] drop-shadow-md">{together.count} {together.label}</p>
-          <p className="text-white/70 font-semibold text-[12px] drop-shadow-md">{together.date}</p>
         </div>
 
         {/* Cities row */}

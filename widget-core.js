@@ -53,7 +53,7 @@ widget.backgroundGradient = gradient;
 const shadow = new Color("#000", 0.5);
 
 // Together since (top)
-const togetherTitle = widget.addText("Together since");
+const togetherTitle = widget.addText("Together since Dec 27, 2025");
 togetherTitle.font = Font.semiboldSystemFont(11);
 togetherTitle.textColor = Color.white();
 togetherTitle.shadowColor = shadow;
@@ -64,12 +64,6 @@ togetherCount.font = Font.boldSystemFont(14);
 togetherCount.textColor = Color.white();
 togetherCount.shadowColor = shadow;
 togetherCount.shadowRadius = 3;
-
-const dateText = widget.addText("Dec 27, 2025");
-dateText.font = Font.semiboldSystemFont(10);
-dateText.textColor = new Color("#fff", 0.7);
-dateText.shadowColor = shadow;
-dateText.shadowRadius = 3;
 
 widget.addSpacer();
 
