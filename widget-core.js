@@ -49,100 +49,130 @@ if (diffDays < 0) {
   togetherLabel = diffDays + " days";
 }
 
-const widget = new ListWidget();
-widget.setPadding(24, 28, 24, 28);
-widget.backgroundImage = bgImage;
-
-const gradient = new LinearGradient();
-gradient.locations = [0, 1];
-gradient.colors = [new Color("#000", 0.3), new Color("#000", 0.3)];
-widget.backgroundGradient = gradient;
-
 const shadow = new Color("#000", 0.5);
+const widget = new ListWidget();
+widget.setPadding(16, 20, 16, 20);
+widget.backgroundColor = new Color("#111", 1);
 
 // Together since (top)
-const togetherTitle = widget.addText("Together since Dec 27, 2025");
-togetherTitle.font = Font.semiboldSystemFont(11);
+const togetherTitle = widget.addText("Together since");
+togetherTitle.font = Font.boldSystemFont(14);
 togetherTitle.textColor = Color.white();
-togetherTitle.shadowColor = shadow;
-togetherTitle.shadowRadius = 3;
 
-const togetherCount = widget.addText(togetherLabel);
-togetherCount.font = Font.boldSystemFont(14);
-togetherCount.textColor = Color.white();
-togetherCount.shadowColor = shadow;
-togetherCount.shadowRadius = 3;
+const togetherSub = widget.addText("Dec 27, 2025 \u00B7 " + togetherLabel);
+togetherSub.font = Font.systemFont(11);
+togetherSub.textColor = new Color("#fff", 0.4);
 
-// iMessage conversation
+widget.addSpacer(6);
+
+// Photo + messages row
+const midRow = widget.addStack();
+midRow.layoutHorizontally();
+midRow.centerAlignContent();
+midRow.spacing = 10;
+
+// Photo
+const photoStack = midRow.addStack();
+photoStack.size = new Size(60, 60);
+photoStack.cornerRadius = 30;
+photoStack.borderWidth = 2;
+photoStack.borderColor = new Color("#e8a0bf", 0.4);
+const photo = photoStack.addImage(bgImage);
+photo.imageSize = new Size(60, 60);
+photo.containerRelativeShape = true;
+
+// Messages
+const msgStack = midRow.addStack();
+msgStack.layoutVertically();
+msgStack.spacing = 3;
+
 const convo = CONVOS[photoIndex];
 for (const msg of convo) {
-  const row = widget.addStack();
+  const row = msgStack.addStack();
   row.layoutHorizontally();
   if (msg.from === "sb") row.addSpacer();
   const bubble = row.addStack();
-  bubble.backgroundColor = msg.from === "sb" ? new Color("#007AFF", 1) : new Color("#fff", 0.2);
-  bubble.cornerRadius = 12;
-  bubble.setPadding(4, 10, 4, 10);
+  bubble.backgroundColor = msg.from === "sb" ? new Color("#9b4d6e", 1) : new Color("#fff", 0.1);
+  bubble.cornerRadius = 10;
+  bubble.setPadding(3, 8, 3, 8);
   const msgText = bubble.addText(msg.text);
-  msgText.font = Font.systemFont(11);
+  msgText.font = Font.systemFont(10);
   msgText.textColor = Color.white();
-  msgText.shadowColor = shadow;
-  msgText.shadowRadius = 2;
+  msgText.lineLimit = 1;
   if (msg.from === "vas") row.addSpacer();
 }
 
 widget.addSpacer();
 
-// Cities row (bottom)
+// City cards row
 const citiesRow = widget.addStack();
 citiesRow.layoutHorizontally();
-citiesRow.spacing = 16;
+citiesRow.spacing = 8;
 
-// London
-const londonStack = citiesRow.addStack();
-londonStack.layoutVertically();
+// London card
+const londonCard = citiesRow.addStack();
+londonCard.layoutVertically();
+londonCard.backgroundColor = new Color("#fff", 0.05);
+londonCard.cornerRadius = 14;
+londonCard.setPadding(10, 12, 10, 12);
+londonCard.size = new Size(0, 0);
 
-const londonLabel = londonStack.addText("\uD83E\uDED6 London  " + londonDate);
-londonLabel.font = Font.semiboldSystemFont(11);
-londonLabel.textColor = Color.white();
-londonLabel.shadowColor = shadow;
-londonLabel.shadowRadius = 3;
+const londonHeader = londonCard.addStack();
+londonHeader.layoutHorizontally();
+londonHeader.spacing = 4;
+const londonEmoji = londonHeader.addText("\uD83E\uDED6");
+londonEmoji.font = Font.systemFont(10);
+const londonLabel = londonHeader.addText("LONDON");
+londonLabel.font = Font.semiboldSystemFont(9);
+londonLabel.textColor = new Color("#fff", 0.5);
 
-const londonTimeText = londonStack.addText(londonTime);
-londonTimeText.font = Font.boldSystemFont(20);
+londonCard.addSpacer(4);
+const londonTimeText = londonCard.addText(londonTime);
+londonTimeText.font = Font.boldSystemFont(18);
 londonTimeText.textColor = Color.white();
-londonTimeText.shadowColor = shadow;
-londonTimeText.shadowRadius = 3;
 
-const londonTempText = londonStack.addText(londonTemp + "\u00B0");
-londonTempText.font = Font.semiboldSystemFont(14);
-londonTempText.textColor = Color.white();
-londonTempText.shadowColor = shadow;
-londonTempText.shadowRadius = 3;
-
-// San Francisco
-const sfStack = citiesRow.addStack();
-sfStack.layoutVertically();
-
-const sfLabel = sfStack.addText("\uD83C\uDF01 San Francisco  " + sfDate);
-sfLabel.font = Font.semiboldSystemFont(11);
-sfLabel.textColor = Color.white();
-sfLabel.shadowColor = shadow;
-sfLabel.shadowRadius = 3;
-
-const sfTimeText = sfStack.addText(sfTime);
-sfTimeText.font = Font.boldSystemFont(20);
-sfTimeText.textColor = Color.white();
-sfTimeText.shadowColor = shadow;
-sfTimeText.shadowRadius = 3;
-
-const sfTempText = sfStack.addText(sfTemp + "\u00B0");
-sfTempText.font = Font.semiboldSystemFont(14);
-sfTempText.textColor = Color.white();
-sfTempText.shadowColor = shadow;
-sfTempText.shadowRadius = 3;
+const londonInfo = londonCard.addStack();
+londonInfo.layoutHorizontally();
+londonInfo.spacing = 4;
+const londonTempText = londonInfo.addText(londonTemp + "\u00B0");
+londonTempText.font = Font.boldSystemFont(14);
+londonTempText.textColor = new Color("#e8a0bf", 1);
+const londonDateText = londonInfo.addText(londonDate);
+londonDateText.font = Font.systemFont(9);
+londonDateText.textColor = new Color("#fff", 0.3);
 
 citiesRow.addSpacer();
+
+// SF card
+const sfCard = citiesRow.addStack();
+sfCard.layoutVertically();
+sfCard.backgroundColor = new Color("#fff", 0.05);
+sfCard.cornerRadius = 14;
+sfCard.setPadding(10, 12, 10, 12);
+
+const sfHeader = sfCard.addStack();
+sfHeader.layoutHorizontally();
+sfHeader.spacing = 4;
+const sfEmoji = sfHeader.addText("\uD83C\uDF01");
+sfEmoji.font = Font.systemFont(10);
+const sfLabel = sfHeader.addText("SAN FRANCISCO");
+sfLabel.font = Font.semiboldSystemFont(9);
+sfLabel.textColor = new Color("#fff", 0.5);
+
+sfCard.addSpacer(4);
+const sfTimeText = sfCard.addText(sfTime);
+sfTimeText.font = Font.boldSystemFont(18);
+sfTimeText.textColor = Color.white();
+
+const sfInfo = sfCard.addStack();
+sfInfo.layoutHorizontally();
+sfInfo.spacing = 4;
+const sfTempText = sfInfo.addText(sfTemp + "\u00B0");
+sfTempText.font = Font.boldSystemFont(14);
+sfTempText.textColor = new Color("#e8a0bf", 1);
+const sfDateText = sfInfo.addText(sfDate);
+sfDateText.font = Font.systemFont(9);
+sfDateText.textColor = new Color("#fff", 0.3);
 
 if (config.runsInWidget) {
   Script.setWidget(widget);

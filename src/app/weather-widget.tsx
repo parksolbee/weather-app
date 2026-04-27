@@ -91,14 +91,14 @@ export function WeatherWidget({ londonTemp, sfTemp }: { londonTemp: number; sfTe
     <div className="relative w-[400px] rounded-[20px] overflow-hidden shadow-2xl shrink-0 bg-[#111]">
       {/* Top: Together since */}
       <div className="p-5 pb-3">
-        <p className="text-[#e8a0bf] text-[11px] font-semibold uppercase tracking-wider">Together since Dec 27, 2025</p>
-        <p className="text-white font-bold text-[22px] leading-tight">{together.count} {together.label}</p>
+        <p className="text-white font-bold text-[16px]">Together since</p>
+        <p className="text-white/40 text-[12px]">Dec 27, 2025 · {together.count} {together.label}</p>
       </div>
 
       {/* Photo + Messages row */}
-      <div className="flex items-center gap-3 px-5 pb-3">
+      <div className="flex items-center gap-4 px-5 pb-3">
         {/* Rotating photo */}
-        <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
+        <div className="relative w-[120px] h-[120px] rounded-full overflow-hidden shrink-0 ring-2 ring-[#e8a0bf]/40">
           {PHOTOS.map((src, i) => (
             <img
               key={src}
@@ -161,7 +161,7 @@ function MessageBubbles({ convo, photoIndex }: { convo: { from: string; text: st
   }, [photoIndex]);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       {convo.map((msg, i) => (
         <div
           key={`${photoIndex}-${i}`}
