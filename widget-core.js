@@ -126,7 +126,7 @@ londonTempText.shadowRadius = 3;
 var sfCard = citiesRow.addStack();
 sfCard.layoutVertically();
 
-var sfLabel = sfCard.addText("🌁 SF · " + sfDate);
+var sfLabel = sfCard.addText("🌁 SAN FRANCISCO · " + sfDate);
 sfLabel.font = Font.semiboldRoundedSystemFont(10);
 sfLabel.textColor = new Color("#fff", 0.6);
 sfLabel.shadowColor = shadow;
